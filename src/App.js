@@ -1,3 +1,9 @@
+import React from 'react';
+import image1 from './images/1.svg';
+import image2 from './images/2.svg';
+import image3 from './images/3.svg';
+import image4 from './images/4.svg';
+
 const Header = () => (
 	<header>
 		<div className="wrapper">
@@ -29,10 +35,10 @@ const Main = () => (
 );
 
 const imageBackground = {
-	one: { backgroundImage: "url('./images/1.svg')" },
-	two: { backgroundImage: "url('./images/2.svg')" },
-	tree: { backgroundImage: "url('./images/3.svg')" },
-	four: { backgroundImage: "url('./images/4.svg')" }
+	one: { backgroundImage: `url(${image1})` },
+	two: { backgroundImage: `url(${image2})` },
+	tree: { backgroundImage: `url(${image3})` },
+	four: { backgroundImage: `url(${image4})` }
 };
 
 const SliderItem = props => (
@@ -123,4 +129,4 @@ const RenderJSX = () => (
 	</React.Fragment>
 );
 
-ReactDOM.render(<RenderJSX/>, document.getElementById('root'));
+export default RenderJSX;
