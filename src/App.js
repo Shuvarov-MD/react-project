@@ -1,132 +1,60 @@
 import React from 'react';
-import image1 from './images/1.svg';
-import image2 from './images/2.svg';
-import image3 from './images/3.svg';
-import image4 from './images/4.svg';
+import { createGlobalStyle } from 'styled-components';
+import NavBar from './Components/NavBar';
 
-const Header = () => (
-	<header>
-		<div className="wrapper">
-			<div className="header">
-				<a href="#">
-					<div className="header-logo"></div>
-				</a>
-				<a href="tel:888" className="header-phone"></a>
-				<div className="header-phonelink">
-					<a href="tel:7(962)556-1234">+7(962)556-1234</a>
-				</div>
-			</div>
-		</div>
-	</header>
-);
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
 
-const Main = () => (
-	<main>
-		<div className="wrapper">
-			<div className="main">
-				<h1 className="main-head">Заголовок c уникальным торговым предложение по системе 4U</h1>
-				<div className="main-small">Описания предложения компании. Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более.</div>
-				<button className="btn main-btn">
-					<span>Подробнее</span>
-				</button>
-			</div>
-		</div>
-	</main>
-);
+  *, *:: before, *::after {
+    box-sizing: inherit;
+  }
 
-const imageBackground = {
-	one: { backgroundImage: `url(${image1})` },
-	two: { backgroundImage: `url(${image2})` },
-	tree: { backgroundImage: `url(${image3})` },
-	four: { backgroundImage: `url(${image4})` }
-};
+  body {
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    coor: black;
+  }
 
-const SliderItem = props => (
-	<div className="features-slider_item">
-		<div className="features-img" style={props.style}></div>
-		<div className="features-feature">{props.text}</div>
-	</div>
-);
+  img {
+    max-width: 100%;
+    heigth: auto;
+  }
 
-const SliderButton = props => (
-	<button className={`features-slider-arrow features-slider-${props.className}`}>
-		<svg width="9" height="16" xmlns="http://www.w3.org/2000/svg">
-			<path d="M8.707 8.707a1 1 0 0 0 0-1.414L2.343.929A1 1 0 1 0 .93 2.343L6.586 8 .929 13.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM7 9h1V7H7v2z">
-			</path>
-		</svg>
-	</button>
-);
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
-const Features = () => (
-	<section className="features">
-		<div className="wrapper">
-			<div className="features-wrapper">
-				<h2 className="features-head">Уникальный заголовок для преимущества компании</h2>
-				<div className="features-subhead">О нас</div>
-				<div className="features-description">Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить.
-				</div>
-				<div className="features-slider">
-					<div className="features-slider_items">
-						<SliderItem text="Первое целевое преимущество" style={imageBackground.one}/>
-						<SliderItem text="Второе целевое преимущество" style={imageBackground.two}/>
-						<SliderItem text="Третье целевое преимущество" style={imageBackground.tree}/>
-						<SliderItem text="Четвертое целевое преимущество" style={imageBackground.four}/>
-					</div>
-					<SliderButton className="prev"/>
-					<SliderButton className="next"/>
-				</div>
-			</div>
-		</div>
-	</section>
-);
+  ul {
+    list-type: none;
+    padding: 0;
+    margin: 0;
+  }
 
-const Contact = () => (
-	<section className="contact">
-		<div className="wrapper">
-			<div className="contact-wrapper">
-				<h2 className="contact-title">Остались вопросы?</h2>
-				<div className="contact-description">Оставьте номер телефона, и мы перезвоним вам</div>
-				<form action="../mailer.smart.php" className="contact-form">
-					<input type="text" placeholder="Ваше имя"/>
-					<input type="tel" placeholder="Телефон"/>
-					<input type="email" placeholder="E-mail"/>
-					<button	className="btn contact-btn">
-						<span>Позвоните мне</span>
-					</button>
-				</form>
-				<div className="contact-personal">Я даю своё <a href="#">согласие</a> на обработку моих персональных данных.</div>
-			</div>
-		</div>
-	</section>
-);
+  h1, h2, h3 {
+    font-family: Pacifico;
+    padding: 0;
+    margin: 0;
+  }
 
-const Footer = () => (
-	<footer>
-		<div className="footer">
-			<div className="footer-logo"></div>
-			<div className="footer-company">
-				<span>© 2020 XXXcompany. Все права защищены.</span>
-			</div>
-			<a href="tel:888" className="footer-phone"></a>
-			<div className="footer-websurfer">
-				<span className="footer-websurfer_build">Сделано</span>
-				<a href="#">Ваше имя</a>
-			</div>
-			<div className="footer-phonelink">
-				<a href="tel:888">+7(962)556-1234</a>
-			</div>
-		</div>
-	</footer>
-);
+  p {
+    padding: 0;
+    margin: 0;
+  }
 
-const RenderJSX = () => (
-	<React.Fragment>
-		<Header/>
-		<Main/>
-		<Features/>
-		<Contact/>
-		<Footer/>
-	</React.Fragment>
-);
+`;
 
-export default RenderJSX;
+function App() {
+  return (
+    <React.Fragment>
+      <GlobalStyle/>
+      <NavBar/>
+    </React.Fragment>
+  );
+}
+
+export default App;
