@@ -41,7 +41,6 @@ const Login = styled.button`
   color: inherit;
   font-size: 16px;
   line-height: 19px;
-  cursor: pointer;
 `;
 
 
