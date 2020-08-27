@@ -9,6 +9,7 @@ const AddButton = styled.button`
   padding: 18px 0;
   width: 246px;
   transition: all 0.3s linear;
+  margin: 0 auto;
 
   &:hover {
     background-color: transparent;
