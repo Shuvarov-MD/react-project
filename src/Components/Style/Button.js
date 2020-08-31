@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const AddButton = styled.button`
+export const Button = styled.button`
   background-color: #299B01;
   border: 2px solid #299B01;
   font-size: 21px;
@@ -16,9 +15,3 @@ const AddButton = styled.button`
     color: #299B01;
   }
 `;
-
-const Button = ({ text }) => (
-  <AddButton>{text}</AddButton>
-);
-
-export default Button;
