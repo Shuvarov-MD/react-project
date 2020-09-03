@@ -54,8 +54,9 @@ const Order = ({ orders, setOrders }) => {
 
   const totalCounter = orders.reduce((result, order) => order.count + result, 0);
 
-  const deleteOrder = (e) => {
-    setOrders(orders.filter(order => e.target.id !== order.name));
+  const deleteOrder = index => {
+    const newOrders = orders.filter((item, i) => index !== i);
+    setOrders(newOrders);
   };
 
   return (
@@ -63,7 +64,7 @@ const Order = ({ orders, setOrders }) => {
       <OrderTitle>ВАШ ЗАКАЗ</OrderTitle>
       <OrderContent>
         { orders.length ? <OrderList>
-          {orders.map(order => <OrderListItem order={order} deleteOrder={deleteOrder}/>)}
+          {orders.map((order, index) => <OrderListItem key={index} order={order} deleteOrder={deleteOrder} index={index}/>)}
         </OrderList> :
         <EmptyList>Список заказов пуст</EmptyList> }
       </OrderContent>
