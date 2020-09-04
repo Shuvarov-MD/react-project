@@ -38,13 +38,17 @@ const Topping = styled.p`
   color: green;
 `;
 
-const OrderListItem = ({ order, deleteOrder, index }) => {
+const OrderListItem = ({ order, deleteOrder, index, setOpenItem }) => {
 
   const toppings = order.topping.filter(item => item.checked === true);
 
   return (
     <>
-      <OrderItemStyled>
+      <OrderItemStyled onClick={(e) => {
+        if (!e.target.matches('button')) {
+          setOpenItem({...order, index});
+        }
+      }}>
         <ItemName>{order.name} {order.choice}</ItemName>
         <span>{order.count}</span>
         <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
