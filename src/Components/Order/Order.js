@@ -4,6 +4,7 @@ import { Button } from '../Style/Button';
 import OrderListItem from './OrderListItem';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
+import { projection } from '../Functions/secondaryFunction';
 
 const OrderStyled = styled.section`
   position: fixed;
@@ -48,7 +49,27 @@ const EmptyList = styled.p`
   text-align: center;
 `;
 
-const Order = ({ orders, setOrders, setOpenItem, authentication, logIn }) => {
+const rulesData = {
+  name: ['name'],
+  price: ['price'],
+  count: ['count'],
+  topping: ['topping', arr => arr.filter(obj => obj.checked).map(obj  => obj.name), arr => arr.length ? arr : 'no topping'],
+  choice: ['choices', item => item ? item : 'no hoices']
+};
+
+const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, firebaseDatabase }) => {
+
+  const dataBase = firebaseDatabase();
+
+  const sendOrder = () => {
+    const newOrder = orders.map(projection(rulesData));
+    dataBase.ref('orders').push().set({
+      nameClient: authentication.displayName,
+      email: authentication.email,
+      order: newOrder
+    });
+    setOrders([]);
+  };
 
   const total = orders.reduce((result, order) => totalPriceItems(order) + result, 0);
 
@@ -57,10 +78,6 @@ const Order = ({ orders, setOrders, setOpenItem, authentication, logIn }) => {
   const deleteOrder = index => {
     const newOrders = orders.filter((item, i) => index !== i);
     setOrders(newOrders);
-  };
-
-  const showOrder = () => {
-    console.log(orders);
   };
 
   return (
@@ -77,7 +94,13 @@ const Order = ({ orders, setOrders, setOpenItem, authentication, logIn }) => {
         <span>{totalCounter}</span>
         <TotalPrice>{formatCurrency(total)}</TotalPrice>
       </Total>
-      {authentication ? <Button onClick={showOrder}>Оформить</Button> : <Button onClick={logIn}>Оформить</Button>}
+      <Button onClick={() => {
+        if(authentication) {
+          sendOrder();
+        } else {
+          logIn();
+        }
+      }}>Оформить</Button>
     </OrderStyled>
   );
 };
