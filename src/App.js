@@ -30,7 +30,7 @@ function App() {
   const auth = useAuth(firebase.auth);
   const openItem = useOpenItem();
   const orders = useOrders();
-  const title = useTitle(openItem.openItem);
+  useTitle(openItem.openItem);
 
   return (
     <React.Fragment>
