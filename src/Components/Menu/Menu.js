@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-//import dbMenu from '../DBMenu';
 import ListItem from './ListItem';
 import bannerImg from '../../img/banner.png';
-import { useFetch } from '../Hooks/useFetch';
+
 
 const MenuStyled = styled.main`
   background-color: #ccc;
@@ -44,15 +43,12 @@ const SkRotatingPlane = styled.div`
   }
 `;
 
-const Menu = ({ setOpenItem }) => {
-
-    const res = useFetch();
-    const dbMenu = res.response;
+const Menu = ({ setOpenItem, dbMenu }) => {
 
   return (
     <MenuStyled>
       <MenuBanner/>
-      { res.response ?
+      { dbMenu ?
         <>
           <SectionMenu>
             <h2>Бургеры</h2>
@@ -62,8 +58,7 @@ const Menu = ({ setOpenItem }) => {
             <h2>Закуски / Напитки</h2>
             <ListItem itemList={dbMenu.other} setOpenItem={setOpenItem} />
           </SectionMenu>
-        </> : res.error ?
-        <div>Sorry, we'll fix it soon...</div> :
+        </> :
         <section>
           <SkRotatingPlane className='sk-rotating-plane'/>
         </section>
