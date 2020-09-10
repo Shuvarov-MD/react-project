@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Style/Button';
 import { CountItem } from './CountItem';
@@ -9,20 +9,9 @@ import { Toppings } from './Toppings';
 import { Choices } from './Choices';
 import { useToppings } from '../Hooks/useToppings';
 import { useChoices } from '../Hooks/useChoices';
+import { Overlay } from '../Style/ComponentStyle';
+import { Context } from '../Functions/context';
 
-
-const Overlay = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 20;
-`;
 
 const Modal = styled.div`
   background-color: #fff;
@@ -69,9 +58,9 @@ const TotalPriceItem = styled.div`
 `;
 
 
+const ModalItem = () => {
 
-const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
-
+  const { openItem: { openItem, setOpenItem }, orders: { orders, setOrders } } = useContext(Context);
   const counter = useCount(openItem);
   const toppings = useToppings(openItem);
   const choices = useChoices(openItem);
@@ -125,7 +114,6 @@ const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     </Overlay>
   );
 };
-
 
 
 export default ModalItem;
